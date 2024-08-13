@@ -12,19 +12,18 @@ function ensureDataDirectoryExists() {
 	}
 }
 
-export function loadPreviousBoardData() {
+export function loadPreviousBoardData(): TrelloBoardElement[] | null {
 	ensureDataDirectoryExists(); // Ensure the directory exists before trying to read the file
 	if (fs.existsSync(DATA_FILE_PATH)) {
 		const data = JSON.parse(fs.readFileSync(DATA_FILE_PATH, "utf-8"));
 		console.log("Previous board data loaded from file");
-		return data;
+		return data as TrelloBoardElement[];
 	}
 	console.log("No previous board data found");
 	return null;
 }
 
-// biome-ignore lint/suspicious/noExplicitAny: This function is used to save the board data to a file
-export function saveNewBoardData(data: any) {
+export function saveNewBoardData(data: TrelloBoardElement[]) {
 	ensureDataDirectoryExists(); // Ensure the directory exists before trying to save the file
 	fs.writeFileSync(DATA_FILE_PATH, JSON.stringify(data, null, 2));
 	console.log(`New board data saved to ${DATA_FILE_PATH}`);
