@@ -1,0 +1,111 @@
+[
+	{
+		"listName": "Product Backlog",
+		"cards": [
+			{
+				"id": "6671b1523902bc4c819662b5",
+				"name": "User profile creation",
+				"due": null,
+				"url": "https://trello.com/c/c3wmW72E"
+			},
+			{
+				"id": "6674391c025eb8c0f23c5aa1",
+				"name": "Research solutions for Target's/Walmart data",
+				"due": null,
+				"url": "https://trello.com/c/IiouBujC"
+			},
+			{
+				"id": "66724d87aafd7c9719a5753a",
+				"name": "Reorder/customizable weekly list",
+				"due": null,
+				"url": "https://trello.com/c/6CRTzXR0"
+			},
+			{
+				"id": "66722ad3998a1bc2367c6782",
+				"name": "List suggestions",
+				"due": null,
+				"url": "https://trello.com/c/hTmAhorF"
+			},
+			{
+				"id": "66724a871c6e60e6041ca643",
+				"name": "In-store grocery shopping",
+				"due": null,
+				"url": "https://trello.com/c/Tre87Lxc"
+			},
+			{
+				"id": "66724ba90d490bb867daff91",
+				"name": "Invoice scanning feature",
+				"due": null,
+				"url": "https://trello.com/c/jFatyVVV"
+			},
+			{
+				"id": "66739f864a800f3f948480f4",
+				"name": "Interface basic design",
+				"due": null,
+				"url": "https://trello.com/c/nkuTlYVo"
+			}
+		]
+	},
+	{
+		"listName": "Sprint 1",
+		"cards": [
+			{
+				"id": "66722bdb48e4049fb5cae5b8",
+				"name": "Cart optimization using online stores",
+				"due": null,
+				"url": "https://trello.com/c/tnCDDDzq"
+			},
+			{
+				"id": "667439a01faba067475696a5",
+				"name": "In-store/digital coupon integration",
+				"due": "2024-08-17T01:08:00.000Z",
+				"url": "https://trello.com/c/IElDpJzi"
+			}
+		]
+	},
+	{
+		"listName": "To Do",
+		"cards": [
+			{
+				"id": "66722e383113891e01b3789b",
+				"name": "Budget tracking and cost comparison",
+				"due": "2024-08-25T01:08:00.000Z",
+				"url": "https://trello.com/c/t7t6wJZ9"
+			},
+			{
+				"id": "6671b450f604b4f406b0c808",
+				"name": "Grocery list creation from profile preferences",
+				"due": "2024-08-13T01:08:00.000Z",
+				"url": "https://trello.com/c/CF7b0uDt"
+			}
+		]
+	},
+	{
+		"listName": "Doing",
+		"cards": [
+			{
+				"id": "667250bf79e08af1dbef306c",
+				"name": "List sharing functionality",
+				"due": null,
+				"url": "https://trello.com/c/Pji7rNlF"
+			},
+			{
+				"id": "6671c3525740cdb4871c304d",
+				"name": "Grocery list creation from recipe preferences",
+				"due": null,
+				"url": "https://trello.com/c/Z7F2rEsl"
+			}
+		]
+	},
+	{
+		"listName": "Done",
+		"cards": [
+			{
+				"id": "6671b604418fa4dfcb36149d",
+				"name": "User diet and preferred dishes",
+				"due": "2024-09-02T00:31:00.000Z",
+				"url": "https://trello.com/c/UFMcbM3Q"
+			}
+		]
+	}
+]
