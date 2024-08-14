@@ -32,13 +32,13 @@ export function filterTasksForThisWeek(tasks: TrelloBoardElement[]) {
 const listNamesToFilter = new Set(["Backlog", "To Do", "Doing"]);
 
 export function filterTasksFromListsForThisWeek(tasks: TrelloBoardElement[]) {
-	const groupedTasks = tasks.reduce((acc, list) => {
+	return tasks.reduce((acc, list) => {
 		if (listNamesToFilter.has(list.listName)) {
 			const dueThisWeek = list.cards.filter((card) => {
 				if (card.due) {
 					const dueDate =
 						typeof card.due === "string" ? parseISO(card.due) : card.due;
-					return isThisWeek(dueDate, { weekStartsOn: 1 });
+					return isThisWeek(dueDate, { weekStartsOn: 1 }) && !isToday(dueDate);
 				}
 				return false;
 			});
@@ -53,6 +53,4 @@ export function filterTasksFromListsForThisWeek(tasks: TrelloBoardElement[]) {
 		}
 		return acc;
 	}, [] as TrelloBoardElement[]);
-
-	return groupedTasks;
 }
