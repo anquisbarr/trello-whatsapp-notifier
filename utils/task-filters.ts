@@ -1,23 +1,30 @@
-import { isToday, parseISO, isThisWeek } from "date-fns";
+import { isThisWeek, isToday, parseISO } from "date-fns";
+import type { TrelloBoardElement } from "../types/board";
 
-// Function to filter tasks that are due today
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-export function filterTasksForToday(tasks: any) {
-	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-	return tasks.flatMap((list: any) =>
-		// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-		list.cards.filter((card: any) => card.due && isToday(parseISO(card.due))),
+export function filterTasksForToday(tasks: TrelloBoardElement[]) {
+	return tasks.flatMap((list) =>
+		list.cards.filter((card) => {
+			if (card.due) {
+				const dueDate =
+					typeof card.due === "string" ? parseISO(card.due) : card.due;
+				console.log(`Checking date: ${dueDate} for task: ${card.name}`);
+				return isToday(dueDate);
+			}
+			return false;
+		}),
 	);
 }
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-export function filterTasksForThisWeek(tasks: any) {
-	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-	return tasks.flatMap((list: any) =>
-		list.cards.filter(
-			// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-			(card: any) =>
-				card.due && isThisWeek(parseISO(card.due), { weekStartsOn: 1 }),
-		),
+export function filterTasksForThisWeek(tasks: TrelloBoardElement[]) {
+	return tasks.flatMap((list) =>
+		list.cards.filter((card) => {
+			if (card.due) {
+				const dueDate =
+					typeof card.due === "string" ? parseISO(card.due) : card.due;
+				console.log(`Checking date: ${dueDate} for task: ${card.name}`);
+				return isThisWeek(dueDate, { weekStartsOn: 1 }); // Week starts on Monday
+			}
+			return false;
+		}),
 	);
 }
