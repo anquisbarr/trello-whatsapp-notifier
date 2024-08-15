@@ -38,6 +38,17 @@ export async function processTasksAndSendMessages(
 	}
 }
 
+function formatTasksMessage(due: string, tasks: TrelloBoardElement[]): string {
+	let message = `*Tasks due ${due}*:\n`;
+
+	for (const task of tasks) {
+		for (const card of task.cards) {
+			message += `- ${card.name} (Status: ${task.listName}, Due: ${card.due?.toLocaleDateString()})\n`;
+		}
+	}
+
+	return message;
+}
 function sendWhatsAppMessage(
 	client: Client,
 	groupId: string,
