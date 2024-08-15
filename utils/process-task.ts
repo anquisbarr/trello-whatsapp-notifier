@@ -39,7 +39,7 @@ export async function processTasksAndSendMessages(
 		sendWhatsAppMessage(
 			client,
 			groupId,
-			formatTasksMessage("tomorrow", todayDueTasks),
+			formatTasksMessage("tomorrow", tomorrowDueTasks),
 		);
 
 		sendWhatsAppMessage(
