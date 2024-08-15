@@ -76,10 +76,11 @@ function sendWhatsAppMessage(
 
 	client
 		.sendMessage(groupId, message)
-		.then((response) => {
+		.then(async (response) => {
 			console.log(
 				`Message sent successfully: ID - ${response.id.id}, To - ${response.to}`,
 			);
+			await new Promise((resolve) => setTimeout(resolve, 2000)); // 2-second delay
 		})
 		.catch((err) => {
 			console.error("Failed to send message:", err.message || err);
