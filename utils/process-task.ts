@@ -1,9 +1,15 @@
 import { loadPreviousBoardData, saveNewBoardData } from "./board-storage";
 import { getBoardTasks } from "../client/trello";
-import { filterTasksForToday, filterTasksForThisWeek } from "./task-filters";
+import {
+	filterTasksFromListsForThisWeek,
+	filterTasksFromListsForToday,
+	filterTasksFromListsForTomorrow,
+} from "./task-filters";
 import type { Client } from "whatsapp-web.js";
+import type { TrelloBoardElement } from "../types/board";
 
-const boardId = "6671b12d8f092446641b6503";
+// const boardId = "6671b12d8f092446641b6503";
+const boardId = "66b859bc3f525f2e2d32ed3a";
 
 export async function processTasksAndSendMessages(
 	client: Client,
@@ -20,18 +26,26 @@ export async function processTasksAndSendMessages(
 			console.log("Board data has not changed");
 		}
 
-		const todayTasks = filterTasksForToday(tasks);
-		const weekTasks = filterTasksForThisWeek(tasks);
+		const todayDueTasks = filterTasksFromListsForToday(tasks);
+		const tomorrowDueTasks = filterTasksFromListsForTomorrow(tasks);
+		const weekDueTasks = filterTasksFromListsForThisWeek(tasks);
 
 		sendWhatsAppMessage(
 			client,
 			groupId,
-			`Tasks due today:\n${JSON.stringify(todayTasks, null, 2)}`,
+			formatTasksMessage("today", todayDueTasks),
 		);
+
 		sendWhatsAppMessage(
 			client,
 			groupId,
-			`Tasks due this week:\n${JSON.stringify(weekTasks, null, 2)}`,
+			formatTasksMessage("tomorrow", todayDueTasks),
+		);
+
+		sendWhatsAppMessage(
+			client,
+			groupId,
+			formatTasksMessage("week", weekDueTasks),
 		);
 	} catch (error) {
 		console.error("Error during processing tasks:", error);
@@ -49,6 +63,7 @@ function formatTasksMessage(due: string, tasks: TrelloBoardElement[]): string {
 
 	return message;
 }
+
 function sendWhatsAppMessage(
 	client: Client,
 	groupId: string,
