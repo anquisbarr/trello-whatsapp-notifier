@@ -1,4 +1,14 @@
-import { isThisWeek, isToday, isTomorrow, parseISO } from "date-fns";
+import {
+	addDays,
+	isAfter,
+	isSaturday,
+	isSunday,
+	isThisWeek,
+	isToday,
+	isTomorrow,
+	parseISO,
+	startOfWeek,
+} from "date-fns";
 import type { TrelloBoardElement } from "../types/board";
 
 export function filterTasksForToday(tasks: TrelloBoardElement[]) {
@@ -86,6 +96,15 @@ export function filterTasksFromListsForThisWeek(tasks: TrelloBoardElement[]) {
 				if (card.due) {
 					const dueDate =
 						typeof card.due === "string" ? parseISO(card.due) : card.due;
+
+					if (isSaturday(new Date()) || isSunday(new Date())) {
+						const startOfNextWeek = startOfWeek(addDays(new Date(), 1), {
+							weekStartsOn: 1,
+						});
+						return isAfter(dueDate, startOfNextWeek) && !isToday(dueDate);
+					}
+
+					// Regular case for other days
 					return isThisWeek(dueDate, { weekStartsOn: 1 }) && !isToday(dueDate);
 				}
 				return false;
