@@ -13,15 +13,18 @@ const client = initializeClient({
 	puppeteer: {
 		headless: true,
 		args: ["--no-sandbox", "--disable-setuid-sandbox"],
+		timeout: 120000, // Increase timeout if necessary
+		executablePath:
+			"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
 	},
 });
 
 handleClientEvents(client);
 
 // Run the main process when the client is ready
-client.on("ready", () => {
+client.on("ready", async () => {
 	console.log("Client is ready!");
-	processTasksAndSendMessages(client, groupId);
+	await processTasksAndSendMessages(client, groupId);
 });
 
 client.initialize();
