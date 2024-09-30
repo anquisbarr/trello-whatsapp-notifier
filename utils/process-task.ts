@@ -7,6 +7,7 @@ import {
 } from "./task-filters";
 import type { Client } from "whatsapp-web.js";
 import type { TrelloBoardElement } from "../types/board";
+import { sleep } from "bun";
 
 // const boardId = "6671b12d8f092446641b6503";
 const boardId = "66b859bc3f525f2e2d32ed3a";
@@ -33,19 +34,23 @@ export async function processTasksAndSendMessages(
 		sendWhatsAppMessage(
 			client,
 			groupId,
-			formatTasksMessage("today", todayDueTasks),
+			formatTasksMessage("hoy", todayDueTasks),
 		);
+
+		await sleep(1000);
 
 		sendWhatsAppMessage(
 			client,
 			groupId,
-			formatTasksMessage("tomorrow", tomorrowDueTasks),
+			formatTasksMessage("mañana", tomorrowDueTasks),
 		);
+
+		await sleep(1000);
 
 		sendWhatsAppMessage(
 			client,
 			groupId,
-			formatTasksMessage("week", weekDueTasks),
+			formatTasksMessage("la semana", weekDueTasks),
 		);
 	} catch (error) {
 		console.error("Error during processing tasks:", error);
@@ -53,11 +58,11 @@ export async function processTasksAndSendMessages(
 }
 
 function formatTasksMessage(due: string, tasks: TrelloBoardElement[]): string {
-	let message = `*Tasks due ${due}*:\n`;
+	let message = `*Tareas pendientes para ${due}*\n`;
 
 	for (const task of tasks) {
 		for (const card of task.cards) {
-			message += `- ${card.name} (Status: ${task.listName}, Due: ${card.due?.toLocaleDateString()})\n`;
+			message += `- ${card.name} (Estado: ${task.listName}, Fecha de vencimiento: ${card.due ? card.due.toLocaleDateString() : "Sin fecha de vencimiento"})\n`;
 		}
 	}
 
