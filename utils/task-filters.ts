@@ -30,7 +30,11 @@ export function filterTasksForThisWeek(tasks: TrelloBoardElement[]) {
 			if (card.due) {
 				const dueDate =
 					typeof card.due === "string" ? parseISO(card.due) : card.due;
-				return isThisWeek(dueDate, { weekStartsOn: 1 }); // Week starts on Monday
+				return (
+					isThisWeek(dueDate, { weekStartsOn: 1 }) &&
+					!isToday(dueDate) &&
+					!isTomorrow(dueDate)
+				);
 			}
 			return false;
 		}),
